@@ -1,26 +1,37 @@
-use num::{BigUint, Num, Zero};
-// use rand::{Rng, SeedableRng};
-// use rand_xorshift::XorShiftRng;
-use rayon::prelude::{IntoParallelIterator, ParallelBridge, ParallelIterator};
-// use std::cell::RefCell;
-use std::fmt::Display;
-// use std::io;
+use num::Zero;
+use std::fmt;
 use std::ops::Rem;
-// use std::rc::Rc;
 
-pub fn fizzbuzz<'a, T: 'a + Zero, U: 'a + From<u32> + Zero + Display>(
-    number: &'a U,
-) -> Box<dyn 'a + Display>
+pub enum FizzBuzz {
+    Fizz,
+    Buzz,
+    FizzBuzz,
+    Number(String),
+}
+
+impl fmt::Display for FizzBuzz {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            FizzBuzz::Fizz => write!(f, "Fizz"),
+            FizzBuzz::Buzz => write!(f, "Buzz"),
+            FizzBuzz::FizzBuzz => write!(f, "FizzBuzz"),
+            FizzBuzz::Number(x) => write!(f, "{x}"),
+        }
+    }
+}
+
+impl<T, U> From<&T> for FizzBuzz
 where
-    &'a U: Rem<U, Output = T>,
+    T: From<u8>,
+    for<'a> &'a T: Rem<T, Output = U> + ToString,
+    U: Zero,
 {
-    match (
-        (number % U::from(3)).is_zero(),
-        (number % U::from(5)).is_zero(),
-    ) {
-        (true, true) => Box::new("FizzBuzz"),
-        (true, _) => Box::new("Fizz"),
-        (_, true) => Box::new("Buzz"),
-        _ => Box::new(number),
+    fn from(x: &T) -> FizzBuzz {
+        match ((x % T::from(3)).is_zero(), (x % T::from(5)).is_zero()) {
+            (true, true) => FizzBuzz::FizzBuzz,
+            (true, _) => FizzBuzz::Fizz,
+            (_, true) => FizzBuzz::Buzz,
+            _ => FizzBuzz::Number(x.to_string()),
+        }
     }
 }

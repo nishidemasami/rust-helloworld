@@ -1,7 +1,5 @@
 mod utils;
 
-// use utils::fizzbuzz::fizzbuzz;
-
 use num::{BigUint, Num, Zero};
 // use rand::{Rng, SeedableRng};
 // use rand_xorshift::XorShiftRng;
@@ -269,85 +267,109 @@ where
 fn fizz_buzz_test() {
     use num::{BigInt, Num};
 
-    assert_eq!(utils::fizzbuzz::fizzbuzz(&1u32).to_string(), "1");
-    assert_eq!(utils::fizzbuzz::fizzbuzz(&3u32).to_string(), "Fizz");
-    assert_eq!(utils::fizzbuzz::fizzbuzz(&5u32).to_string(), "Buzz");
-    assert_eq!(utils::fizzbuzz::fizzbuzz(&15u32).to_string(), "FizzBuzz");
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&18446744073709551601u64).to_string(),
-        "18446744073709551601"
-    );
-    assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&18446744073709551603u64).to_string(),
-        "Fizz"
-    );
-    assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&18446744073709551605u64).to_string(),
-        "Buzz"
-    );
-    assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&18446744073709551615u64).to_string(),
-        "FizzBuzz"
-    );
-    assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&BigInt::from_str_radix("1", 10).unwrap()).to_string(),
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&1u32).to_string(),
         "1"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&BigInt::from_str_radix("3", 10).unwrap()).to_string(),
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&3u32).to_string(),
         "Fizz"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&BigInt::from_str_radix("5", 10).unwrap()).to_string(),
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&5u32).to_string(),
         "Buzz"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&BigInt::from_str_radix("15", 10).unwrap()).to_string(),
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&15u32).to_string(),
         "FizzBuzz"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&BigInt::from_str_radix("18446744073709551616", 10).unwrap())
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&18446744073709551601u64).to_string(),
+        "18446744073709551601"
+    );
+    assert_eq!(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&18446744073709551603u64).to_string(),
+        "Fizz"
+    );
+    assert_eq!(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&18446744073709551605u64).to_string(),
+        "Buzz"
+    );
+    assert_eq!(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&18446744073709551615u64).to_string(),
+        "FizzBuzz"
+    );
+    assert_eq!(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&BigInt::from_str_radix("1", 10).unwrap())
             .to_string(),
+        "1"
+    );
+    assert_eq!(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&BigInt::from_str_radix("3", 10).unwrap())
+            .to_string(),
+        "Fizz"
+    );
+    assert_eq!(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&BigInt::from_str_radix("5", 10).unwrap())
+            .to_string(),
+        "Buzz"
+    );
+    assert_eq!(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(&BigInt::from_str_radix("15", 10).unwrap())
+            .to_string(),
+        "FizzBuzz"
+    );
+    assert_eq!(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(
+            &BigInt::from_str_radix("18446744073709551616", 10).unwrap()
+        )
+        .to_string(),
         "18446744073709551616"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&BigInt::from_str_radix("18446744073709551618", 10).unwrap())
-            .to_string(),
+        Into::<utils::fizzbuzz::FizzBuzz>::into(
+            &BigInt::from_str_radix("18446744073709551618", 10).unwrap()
+        )
+        .to_string(),
         "Fizz"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&BigInt::from_str_radix("18446744073709551620", 10).unwrap())
-            .to_string(),
+        Into::<utils::fizzbuzz::FizzBuzz>::into(
+            &BigInt::from_str_radix("18446744073709551620", 10).unwrap()
+        )
+        .to_string(),
         "Buzz"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(&BigInt::from_str_radix("18446744073709551630", 10).unwrap())
-            .to_string(),
+        Into::<utils::fizzbuzz::FizzBuzz>::into(
+            &BigInt::from_str_radix("18446744073709551630", 10).unwrap()
+        )
+        .to_string(),
         "FizzBuzz"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(
             &BigInt::from_str_radix("340282366920938463463374607431768211456", 10).unwrap()
         )
         .to_string(),
         "340282366920938463463374607431768211456"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(
             &BigInt::from_str_radix("340282366920938463463374607431768211458", 10).unwrap()
         )
         .to_string(),
         "Fizz"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(
             &BigInt::from_str_radix("340282366920938463463374607431768211460", 10).unwrap()
         )
         .to_string(),
         "Buzz"
     );
     assert_eq!(
-        utils::fizzbuzz::fizzbuzz(
+        Into::<utils::fizzbuzz::FizzBuzz>::into(
             &BigInt::from_str_radix("340282366920938463463374607431768211470", 10).unwrap()
         )
         .to_string(),
